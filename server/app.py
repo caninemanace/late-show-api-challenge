@@ -5,25 +5,25 @@ from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from config import Config
 
-# Initialize extensions
+
 db = SQLAlchemy()
-migrate = Migrate()
+migrate = Migrate()   # Initialize extensions
 jwt = JWTManager()
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     
-    # Initialize extensions with app
+    
     db.init_app(app)
-    migrate.init_app(app, db)
+    migrate.init_app(app, db)  # Initialize extensions with app
     jwt.init_app(app)
     CORS(app)
     
-    # Import models to register them with SQLAlchemy
+    
     from models import User, Guest, Episode, Appearance
     
-    # Register controllers/blueprints
+   
     from controllers.auth_controller import auth_bp
     from controllers.guest_controller import guest_bp
     from controllers.episode_controller import episode_bp
